@@ -238,7 +238,7 @@ img {
 }
 
 /* On smaller screens, decrease text size */
-@media only screen (max-width: 390px)
+@media only screen (max-width: 393px)
    {
     .dots {
         position: absolute;

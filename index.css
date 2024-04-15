@@ -262,3 +262,28 @@ img {
       -webkit-user-select: none;
     }
 }
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 380px) {
+    .dots {
+        position: absolute;
+        top: 66%;
+        left: 44%;
+    }
+
+    .prev,
+    .next {
+      cursor: pointer;
+      position: absolute;
+      top: 34%;
+      width: auto;
+      padding: 2%;
+      margin-top: 35%;
+      color: rgb(255, 255, 255);
+      font-weight: bold;
+      font-size: 30px;
+      border-radius: 50%;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+}

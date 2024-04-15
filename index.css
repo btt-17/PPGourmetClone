@@ -227,3 +227,21 @@ img {
     }
     
 }
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 400px) {
+    .dots {
+        position: absolute;
+        top: 54%;
+        left: 44%;
+    }
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 380px) {
+    .dots {
+        position: absolute;
+        top: 65%;
+        left: 44%;
+    }
+}

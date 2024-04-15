@@ -238,10 +238,8 @@ img {
 }
 
 /* On smaller screens, decrease text size */
-@media only screen 
-    and (width: 393px) 
-    and (height: 852px) 
-    and (-webkit-device-pixel-ratio: 3)  {
+@media only screen (max-width: 390px)
+   {
     .dots {
         position: absolute;
         top: 68%;

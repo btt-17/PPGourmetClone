@@ -57,7 +57,21 @@
 
 
 <script>
-let slideIndex = 1;
+let slideIndex = 2;
+var currentSlide = 2;
+var slides = document.getElementsByClassName("slide");
+var dots = document.getElementsByClassName("dot");
+var items = document.getElementById("items")
+  var firstSlide =  slides[0];
+  var lastSlide = slides[slides.length-1];
+  var cloneFirst = firstSlide.cloneNode(true);
+  var cloneLast = lastSlide.cloneNode(true);
+  items.appendChild(cloneFirst);
+    items.insertBefore(cloneLast, firstSlide);
+
+console.log(items)
+console.log(slides)
+
 showSlides(slideIndex);
 
 function plusSlides(n) {
@@ -70,33 +84,53 @@ function currentSlide(n) {
 
 function showSlides(n) {
   let i;
-  let slides = document.getElementsByClassName("slide");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
+  
+
+
+  
+  if (n >= slides.length) {slideIndex = 2}    
+  if (n <= 1) {slideIndex = slides.length-1}
+  console.log("debug-2", slides.length, n, "index:"+slideIndex)
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";  
   }
   for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
   }
+  slides[slideIndex].style.display = "block";  
   slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
+  slides[slideIndex-2].style.display = "block";  
+  
+  if (currentSlide > n) {
+        items.scrollRight += 200 
+      }
+      if (currentSlide < n) {
+        items.scrollLeft += 200
+      }
+  
 
+  currentSlide = slideIndex;
+  
+  dots[slideIndex-2].className += " active";
 
-
-  var items = document.getElementById("items")
+  // var items = document.getElementById("items")
   // var firstSlide =  slides[0];
   // var lastSlide = slides[slides.length-1];
   // var cloneFirst = firstSlide.cloneNode(true);
   // var cloneLast = lastSlide.cloneNode(true);
 
-  // items.appendChild(cloneFirst);
-  // items.insertBefore(cloneLast, firstSlide);
-  // // campaign.classList.add('loaded');
+  // if (slides.length==3){
+  //   items.appendChild(cloneFirst);
+  //   items.insertBefore(cloneLast, firstSlide);
+  // }
+
+  // campaign.classList.add('loaded');
 
   // // Mouse and Touch events
   items.onmousedown = dragStart;
+
+
+ 
   
   // Touch events
   items.addEventListener('touchstart', dragStart);
@@ -106,12 +140,11 @@ function showSlides(n) {
   var  posX1=0, posX2=0, posInitial=0, threshold = 0,
       posFinal=0;
 
-  // var  slideSize = slides[0].offsetWidth;
-  // console.log(items)
+  var  slideSize = slides[0].offsetWidth;
 
-  // // Transition events
-  // items.addEventListener('transitionend', checkIndex);
-  var index = 1,
+  // Transition events
+  items.addEventListener('transitionend', checkIndex);
+  var index = 2,
       allowShift = true;
 
   var left  = 0;
@@ -181,14 +214,19 @@ function showSlides(n) {
     };
     
     // allowShift = false;
-    console.log(dir,action,index, slides.length)
+   
     // showSlides(index)
 
+    var dots = document.getElementsByClassName("dot");
+    console.log(items)
+    console.log(slides, slides[1])
+
     n = index;
-    if (index > slides.length) {
-      index = 1
+    if (index >= slides.length ) {
+      index = 2
     }    
-    if (index < 1) {index = slides.length}
+    else if (index <= 1) {index = slides.length-1}
+    console.log(dir,action,n,index, slides.length)
    
 
     for (i = 0; i < slides.length; i++) {
@@ -197,26 +235,37 @@ function showSlides(n) {
     for (i = 0; i < dots.length; i++) {
       dots[i].className = dots[i].className.replace(" active", "");
     }
+    slides[index].style.display = "block";  
     slides[index-1].style.display = "block";  
-    dots[index-1].className += " active";
+    slides[index-2].style.display = "block";  
+   
+    dots[index-2].className += " active";
+      if (currentSlide > n) {
+        items.scrollRight += 200 
+      }
+      if (currentSlide < n) {
+        items.scrollLeft += 200
+      }
+  
+  
 
   }
     
-  // function checkIndex (){
-  //   items.classList.remove('shifting');
+  function checkIndex (){
+    items.classList.remove('shifting');
 
-  //   if (index == -1) {
-  //     items.style.left = -(slidesLength * slideSize) + "px";
-  //     index = slidesLength - 1;
-  //   }
+    if (index == -1) {
+      items.style.left = -(slidesLength * slideSize) + "px";
+      index = slidesLength - 1;
+    }
 
-  //   if (index == slidesLength) {
-  //     items.style.left = -(1 * slideSize) + "px";
-  //     index = 0;
-  //   }
+    if (index == slidesLength) {
+      items.style.left = -(1 * slideSize) + "px";
+      index = 0;
+    }
     
-  //   allowShift = true;
-  // }
+    allowShift = true;
+  }
 
     
 }

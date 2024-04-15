@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)https://paypaygourmet.yahoo.co.jp/ -->
+<html lang="ja" style="--vh: 8.58px;">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="index.css">
+  <!-- <script type="text/javascript" src="main.js"></script> -->
+  <!-- UAL Data Layer -->
+
+
+  <body>
+    <div class="mainPage">
+        
+        <div class="toppr">
+          <img class="test-image" src="media/Frame 12.png">
+       </div>
+
+        <div class="campaign">
+          <div class="items" id="items">
+            <div class="slide">
+              <img class="test-image" src="media/bulldog.jpeg" alt="Cinque Terre" >
+            
+            </div>
+           
+            <div class="slide">
+             <img class="test-image" src="media/Group 24.png" alt="Cinque Terre" >
+            </div>
+            <div class="slide">
+              <img class="test-image" src="media/Group 24.png" alt="Cinque Terre" >
+            </div>
+          </div>
+
+          <a class="prev" onclick="plusSlides(-1)">❮</a>
+          <a class="next" onclick="plusSlides(1)">❯</a>
+
+          <div class="dots" style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+            <span class="dot" onclick="currentSlide(3)"></span> 
+          </div>
+          
+         
+        </div>
+      
+        <div class="other">
+          <img class="test-image" src="media/Frame 13.png" >
+        </div>
+        
+    </div>
+
+ 
+</div>
+
+
+
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("slide");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+
+
+
+  var items = document.getElementById("items")
+  // var firstSlide =  slides[0];
+  // var lastSlide = slides[slides.length-1];
+  // var cloneFirst = firstSlide.cloneNode(true);
+  // var cloneLast = lastSlide.cloneNode(true);
+
+  // items.appendChild(cloneFirst);
+  // items.insertBefore(cloneLast, firstSlide);
+  // // campaign.classList.add('loaded');
+
+  // // Mouse and Touch events
+  items.onmousedown = dragStart;
+  
+  // Touch events
+  items.addEventListener('touchstart', dragStart);
+  items.addEventListener('touchend', dragEnd);
+  items.addEventListener('touchmove', dragAction);
+
+  var  posX1=0, posX2=0, posInitial=0, threshold = 0,
+      posFinal=0;
+
+  // var  slideSize = slides[0].offsetWidth;
+  // console.log(items)
+
+  // // Transition events
+  // items.addEventListener('transitionend', checkIndex);
+  var index = 1,
+      allowShift = true;
+
+  var left  = 0;
+
+  function dragStart (e) {
+    e = e || window.event;
+    e.preventDefault();
+    posInitial = items.offsetLeft;
+    
+    if (e.type == 'touchstart') {
+      posX1 = e.touches[0].clientX;
+    } else {
+      posX1 = e.clientX;
+      document.onmouseup = dragEnd;
+      document.onmousemove = dragAction;
+    }
+  }
+
+  function dragAction (e) {
+    e = e || window.event;
+    
+    if (e.type == 'touchmove') {
+      posX2 = posX1 - e.touches[0].clientX;
+      posX1 = e.touches[0].clientX;
+    } else {
+      posX2 = posX1 - e.clientX;
+      posX1 = e.clientX;
+    }
+    // items.style.left = (items.offsetLeft - posX2) + "px";
+    left = left - posX2 + "px";
+    // console.log(left, posX2)
+  }
+  
+  function dragEnd (e) {
+    // posFinal = items.offsetLeft;
+    posFinal = posX2;
+    console.log(left, posFinal, posInitial, posFinal-posInitial)
+    if (posFinal - posInitial < 0) {
+      shiftSlide(-1, 'drag');
+    } else if (posFinal - posInitial > 0) {
+      shiftSlide(1, 'drag');
+    } else {
+      left = (posInitial) + "px";
+    }
+
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+  
+  function shiftSlide(dir, action) {
+  //   // items.classList.add('shifting');
+      console.log("debug", dir,action,index)
+
+   
+    if (allowShift) {
+      if (!action) { posInitial = items.offsetLeft; }
+
+      if (dir == 1) {
+        // items.style.left = (posInitial - slideSize) + "px";
+        // index++;      
+        index ++
+      } else if (dir == -1) {
+        // items.style.left = (posInitial + slideSize) + "px";
+        // index--;      
+        index --;
+      }
+    };
+    
+    // allowShift = false;
+    console.log(dir,action,index, slides.length)
+    // showSlides(index)
+
+    n = index;
+    if (index > slides.length) {
+      index = 1
+    }    
+    if (index < 1) {index = slides.length}
+   
+
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[index-1].style.display = "block";  
+    dots[index-1].className += " active";
+
+  }
+    
+  // function checkIndex (){
+  //   items.classList.remove('shifting');
+
+  //   if (index == -1) {
+  //     items.style.left = -(slidesLength * slideSize) + "px";
+  //     index = slidesLength - 1;
+  //   }
+
+  //   if (index == slidesLength) {
+  //     items.style.left = -(1 * slideSize) + "px";
+  //     index = 0;
+  //   }
+    
+  //   allowShift = true;
+  // }
+
+    
+}
+
+
+</script>
+
+    
+  </body>
+
+
+<!-- END GTM NoScript -->
+
+</html>

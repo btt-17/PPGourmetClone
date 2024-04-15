@@ -242,7 +242,7 @@ img {
    {
     .dots {
         position: absolute;
-        top: 68%;
+        top: 70%;
         left: 44%;
     }
 
@@ -250,7 +250,7 @@ img {
     .next {
       cursor: pointer;
       position: absolute;
-      top: 37%;
+      top: 40%;
       width: auto;
       padding: 2%;
       margin-top: 35%;

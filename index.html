@@ -19,22 +19,36 @@
        </div>
 
         <div class="campaign">
+          <div class="campaignMessage">学んでトクトク！おでかけ投票キャンペーン</div>
           <div class="items" id="items">
+
             <div class="slide">
-              <img class="test-image" src="media/bulldog.jpeg" alt="Cinque Terre" >
+              <img class="test-image" src="media/Group 42.png" alt="Cinque Terre" >
+            <!-- <div class="zone1"></div>
+            <div class="zone2">1</div> -->
             
             </div>
            
             <div class="slide">
-             <img class="test-image" src="media/Group 24.png" alt="Cinque Terre" >
+              <!-- <div class="zone1"></div> -->
+             <!-- <img class="test-image" src="media/Group 24.png" alt="Cinque Terre" > -->
+             <img class="test-image" src="media/Group 43.png" alt="Cinque Terre" >
+             <!-- <div class="zone2">2</div> -->
             </div>
             <div class="slide">
-              <img class="test-image" src="media/Group 24.png" alt="Cinque Terre" >
+              <!-- <div class="zone1"></div> -->
+              <!-- <img class="test-image" src="media/Group 24.png" alt="Cinque Terre" > -->
+              <!-- <div class="zone2">3</div> -->
+              <img class="test-image" src="media/Group 44.png" alt="Cinque Terre" >
             </div>
           </div>
+          <div class="couponLink">
 
-          <a class="prev" onclick="plusSlides(-1)">❮</a>
-          <a class="next" onclick="plusSlides(1)">❯</a>
+            公式LINEでクーポンを獲得しよう
+          </div>
+
+          <!-- <a class="prev" onclick="plusSlides(-1)">❮</a>
+          <a class="next" onclick="plusSlides(1)">❯</a> -->
 
           <div class="dots" style="text-align:center">
             <span class="dot" onclick="currentSlide(1)"></span> 
@@ -62,12 +76,12 @@ var currentSlide = 2;
 var slides = document.getElementsByClassName("slide");
 var dots = document.getElementsByClassName("dot");
 var items = document.getElementById("items")
-  var firstSlide =  slides[0];
-  var lastSlide = slides[slides.length-1];
-  var cloneFirst = firstSlide.cloneNode(true);
-  var cloneLast = lastSlide.cloneNode(true);
-  items.appendChild(cloneFirst);
-    items.insertBefore(cloneLast, firstSlide);
+var firstSlide =  slides[0];
+var lastSlide = slides[slides.length-1];
+var cloneFirst = firstSlide.cloneNode(true);
+var cloneLast = lastSlide.cloneNode(true);
+items.appendChild(cloneFirst);
+items.insertBefore(cloneLast, firstSlide);
 
 console.log(items)
 console.log(slides)
@@ -221,12 +235,18 @@ function showSlides(n) {
     console.log(items)
     console.log(slides, slides[1])
 
-    n = index;
+    // n = index;
+    // if (index >= slides.length ) {
+    //   index = 2
+    // }    
+    // else if (index <= 1) {index = slides.length-1}
+    // console.log(dir,action,n,index, slides.length)
+     n = index;
     if (index >= slides.length ) {
       index = 2
     }    
     else if (index <= 1) {index = slides.length-1}
-    console.log(dir,action,n,index, slides.length)
+    console.log(dir,action,n,"index:"+index, slides.length)
    
 
     for (i = 0; i < slides.length; i++) {
